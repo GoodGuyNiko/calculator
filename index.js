@@ -12,12 +12,45 @@ app.get("/start", (req, res) => {
     res.render("start.ejs");
 });
 
+app.post("/start", (req, res) => {
+    // Zugriff auf die im Formular übermittelten Daten über req.body
+    const userChoice = req.body.product; // Angenommen, "choice" ist ein Formularelement
+
+    if (userChoice === "imagefilm") {
+        // Wenn der Benutzer 'option1' ausgewählt hat
+        res.redirect("/type");
+    } else if (userChoice === "recruitingfilm") {
+        // Wenn der Benutzer 'option2' ausgewählt hat
+        res.send("/type");
+    } 
+        else if (userChoice === "produktvideo") {
+        // Wenn der Benutzer 'option2' ausgewählt hat
+        res.send("/product");
+    }
+        else {
+        // Standardaktion, wenn keine der obigen Bedingungen erfüllt ist
+        res.send("/cameras");
+    }
+});
+
 app.get("/type", (req, res) => {
     res.render("type.ejs");
 });
 
 app.get("/duration", (req,res) => {
     res.render("duration.ejs");
+});
+
+app.post("/umleitungduration", (req, res) => {
+    res.redirect("/bdl");
+});
+
+app.get("/cameras", (req,res) => {
+    res.render("cameras.ejs");
+});
+
+app.post("/umleitungcameras", (req, res) => {
+    res.redirect("/bdl");
 });
 
 app.get("/bdl", (req,res) => {
@@ -27,6 +60,11 @@ app.get("/bdl", (req,res) => {
 app.get("/addons", (req,res) => {
     res.render("addons.ejs");
 });
+
+app.get("/product", (req,res) => {
+    res.render("product.ejs");
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
