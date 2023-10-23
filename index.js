@@ -13,24 +13,32 @@ app.get("/start", (req, res) => {
 });
 
 app.post("/start", (req, res) => {
-    // Zugriff auf die im Formular übermittelten Daten über req.body
-    const userChoice = req.body.product; // Angenommen, "choice" ist ein Formularelement
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('calculator-form');
+        const resultDiv = document.getElementById('result');
+    
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+    
+            const product = form.querySelector('input[name="product"]:checked').value;
+            let totalPrice = 0;
 
-    if (userChoice === "imagefilm") {
+            if (userChoice === "imagefilm") {
         // Wenn der Benutzer 'option1' ausgewählt hat
-        res.redirect("/type");
-    } else if (userChoice === "recruitingfilm") {
+            res.redirect("/type");
+            } else if (userChoice === "recruitingfilm") {
         // Wenn der Benutzer 'option2' ausgewählt hat
-        res.send("/type");
-    } 
-        else if (userChoice === "produktvideo") {
+            res.send("/type");
+            } 
+            else if (userChoice === "produktvideo") {
         // Wenn der Benutzer 'option2' ausgewählt hat
-        res.send("/product");
-    }
+            res.send("/product");
+            }
         else {
         // Standardaktion, wenn keine der obigen Bedingungen erfüllt ist
-        res.send("/cameras");
-    }
+        res.send("/cameras")};
+        });
+    });
 });
 
 app.get("/type", (req, res) => {
